@@ -1,10 +1,6 @@
 name: Build Android APK
 
 on:
-  push:
-    branches: [ claude/build-android-app-41Dmu, claude/fix-widget-app-links-dxGvc, claude/add-github-actions-token-drWVl ]
-  pull_request:
-    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
