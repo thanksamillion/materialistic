@@ -245,10 +245,11 @@ class WidgetHelper {
     }
 
     private PendingIntent createSettingsPendingIntent(int appWidgetId) {
-        return PendingIntent.getBroadcast(mContext, appWidgetId + 10000,
-                new Intent(WidgetProvider.ACTION_OPEN_SETTINGS)
-                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-                        .setPackage(mContext.getPackageName()),
+        Intent settingsIntent = new Intent(mContext, WidgetConfigActivity.class);
+        settingsIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        settingsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return PendingIntent.getActivity(mContext, appWidgetId + 10000,
+                settingsIntent,
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ?
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE :
                         PendingIntent.FLAG_UPDATE_CURRENT);
