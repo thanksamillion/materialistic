@@ -29,6 +29,8 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            // Use debug signing for release build
+            signingConfig signingConfigs.debug
         }
     }
     lint {
