@@ -29,6 +29,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            signingConfig signingConfigs.debug
         }
     }
     lintOptions {
@@ -79,7 +80,7 @@ dependencies {
             "androidx.room:room-runtime:$roomVersion",
             "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
             "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
-            "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
+            "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion",
             "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     kapt "androidx.room:room-compiler:$roomVersion",

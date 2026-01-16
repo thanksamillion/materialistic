@@ -1,0 +1,62 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ claude/build-android-app-41Dmu ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Debug APK
+      run: |
+        ./gradlew assembleDebug --stacktrace 2>&1 | tee /tmp/build.log
+        exit_code=${PIPESTATUS[0]}
+        if [ $exit_code -ne 0 ]; then
+          echo "::error::Build failed with exit code $exit_code"
+          echo "=== Last 100 lines of build output ==="
+          tail -100 /tmp/build.log
+          echo "=== Searching for errors ==="
+          grep -i "error\|exception\|failed" /tmp/build.log | tail -50 || true
+          exit $exit_code
+        fi
+
+    - name: Build Release APK
+      run: ./gradlew assembleRelease --stacktrace
+
+    - name: Upload Debug APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-debug
+        path: app/build/outputs/apk/debug/app-debug.apk
+
+    - name: Upload Release APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release
+        path: app/build/outputs/apk/release/app-release.apk
+
+    - name: APK Info
+      run: |
+        echo "✅ Build completed successfully!"
+        echo "📱 Debug APK: app/build/outputs/apk/debug/app-debug.apk"
+        echo "📱 Release APK: app/build/outputs/apk/release/app-release.apk"
+        echo ""
+        echo "Download the APKs from the 'Artifacts' section at the top of this workflow run."
