@@ -141,6 +141,8 @@ class WidgetHelper {
         remoteViews.setTextViewText(R.id.subtitle,
                 DateUtils.formatDateTime(mContext, System.currentTimeMillis(),
                         DateUtils.FORMAT_ABBREV_ALL | DateUtils.FORMAT_SHOW_TIME));
+        remoteViews.setOnClickPendingIntent(R.id.button_settings,
+                createSettingsPendingIntent(appWidgetId));
         remoteViews.setOnClickPendingIntent(R.id.button_refresh,
                 createRefreshPendingIntent(appWidgetId));
         Intent intent = new Intent(mContext, WidgetService.class)
@@ -156,6 +158,16 @@ class WidgetHelper {
                         Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ?
                                 PendingIntent.FLAG_MUTABLE :
                                 0));
+    }
+
+    private PendingIntent createSettingsPendingIntent(int appWidgetId) {
+        return PendingIntent.getBroadcast(mContext, appWidgetId + 10000,
+                new Intent(WidgetProvider.ACTION_OPEN_SETTINGS)
+                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+                        .setPackage(mContext.getPackageName()),
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ?
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE :
+                        PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private PendingIntent createRefreshPendingIntent(int appWidgetId) {

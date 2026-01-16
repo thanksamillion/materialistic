@@ -30,6 +30,7 @@ import io.github.hidroh.materialistic.R;
 public class WidgetProvider extends AppWidgetProvider {
 
     static final String ACTION_REFRESH_WIDGET = BuildConfig.APPLICATION_ID + ".ACTION_REFRESH_WIDGET";
+    static final String ACTION_OPEN_SETTINGS = BuildConfig.APPLICATION_ID + ".ACTION_OPEN_SETTINGS";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -37,6 +38,15 @@ public class WidgetProvider extends AppWidgetProvider {
             int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
             new WidgetHelper(context).refresh(appWidgetId);
+        } else if (TextUtils.equals(intent.getAction(), ACTION_OPEN_SETTINGS)) {
+            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    AppWidgetManager.INVALID_APPWIDGET_ID);
+            if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                Intent settingsIntent = new Intent(context, WidgetConfigActivity.class);
+                settingsIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(settingsIntent);
+            }
         } else if (TextUtils.equals(intent.getAction(), AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
             int[] appWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
             if (appWidgetIds != null) {
