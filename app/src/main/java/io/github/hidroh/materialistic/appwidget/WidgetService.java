@@ -72,7 +72,7 @@ public class WidgetService extends RemoteViewsService {
         private static final String SCORE = "%1$dp";
         private static final String COMMENT = "%1$dc";
         private static final String SUBTITLE_SEPARATOR = " - ";
-        private static final int MAX_ITEMS = 10;
+        private static final int MAX_ITEMS = 50;
         private final Context mContext;
         private final ItemManager mItemManager;
         private final String mFilter;
