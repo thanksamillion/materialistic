@@ -249,4 +249,28 @@
     <string name="swipe_refresh" translatable="false">Refresh</string>
     <string name="swipe_share" translatable="false">Share</string>
 
+    <!-- Widget color options -->
+    <string-array name="pref_widget_color_options">
+        <item>Auto (from theme)</item>
+        <item>White</item>
+        <item>Black</item>
+        <item>Grey</item>
+        <item>Dark Grey</item>
+        <item>Light Grey</item>
+        <item>Transparent Black</item>
+        <item>Transparent White</item>
+        <item>Orange</item>
+    </string-array>
+    <string-array name="pref_widget_color_values">
+        <item>@string/pref_widget_color_value_auto</item>
+        <item>@string/pref_widget_color_value_white</item>
+        <item>@string/pref_widget_color_value_black</item>
+        <item>@string/pref_widget_color_value_grey</item>
+        <item>@string/pref_widget_color_value_dark_grey</item>
+        <item>@string/pref_widget_color_value_light_grey</item>
+        <item>@string/pref_widget_color_value_transparent_black</item>
+        <item>@string/pref_widget_color_value_transparent_white</item>
+        <item>@string/pref_widget_color_value_orange</item>
+    </string-array>
+
 </resources>

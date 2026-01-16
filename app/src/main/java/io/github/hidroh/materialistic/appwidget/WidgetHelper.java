@@ -76,6 +76,7 @@ class WidgetHelper {
                 getConfig(appWidgetId, R.string.pref_widget_section),
                 getConfig(appWidgetId, R.string.pref_widget_query));
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), config.widgetLayout);
+        applyCustomColors(appWidgetId, remoteViews, config);
         updateTitle(remoteViews, config);
         updateCollection(appWidgetId, remoteViews, config);
         mAppWidgetManager.updateAppWidget(appWidgetId, remoteViews);
@@ -122,6 +123,89 @@ class WidgetHelper {
                 .edit()
                 .clear()
                 .apply();
+    }
+
+    private int resolveColor(String colorValue, boolean isLightTheme, int elementType) {
+        if (TextUtils.isEmpty(colorValue) || colorValue.equals(mContext.getString(R.string.pref_widget_color_value_auto))) {
+            // Auto: use theme-based defaults
+            switch (elementType) {
+                case 0: // background
+                    return isLightTheme ?
+                            mContext.getColor(R.color.lightGrey) :
+                            mContext.getColor(R.color.blackT12);
+                case 1: // icon
+                case 2: // title
+                    return isLightTheme ?
+                            mContext.getColor(R.color.black) :
+                            mContext.getColor(R.color.white);
+                case 3: // subtitle
+                case 4: // item title
+                    return isLightTheme ?
+                            mContext.getColor(R.color.blackT87) :
+                            mContext.getColor(R.color.whiteT70);
+                case 5: // divider
+                    return isLightTheme ?
+                            mContext.getColor(R.color.grey500) :
+                            mContext.getColor(R.color.grey800);
+                default:
+                    return mContext.getColor(R.color.white);
+            }
+        }
+
+        // Map color value to resource
+        if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_white))) {
+            return mContext.getColor(R.color.white);
+        } else if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_black))) {
+            return mContext.getColor(R.color.black);
+        } else if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_grey))) {
+            return mContext.getColor(R.color.grey500);
+        } else if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_dark_grey))) {
+            return mContext.getColor(R.color.darkGrey);
+        } else if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_light_grey))) {
+            return mContext.getColor(R.color.lightGrey);
+        } else if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_transparent_black))) {
+            return mContext.getColor(R.color.blackT12);
+        } else if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_transparent_white))) {
+            return mContext.getColor(R.color.whiteT50);
+        } else if (colorValue.equals(mContext.getString(R.string.pref_widget_color_value_orange))) {
+            return mContext.getColor(R.color.orange500);
+        }
+
+        // Default fallback
+        return mContext.getColor(R.color.white);
+    }
+
+    private void applyCustomColors(int appWidgetId, RemoteViews remoteViews, WidgetConfig config) {
+        String bgColor = getConfig(appWidgetId, R.string.pref_widget_bg_color);
+        String iconColor = getConfig(appWidgetId, R.string.pref_widget_icon_color);
+        String titleColor = getConfig(appWidgetId, R.string.pref_widget_title_color);
+        String subtitleColor = getConfig(appWidgetId, R.string.pref_widget_subtitle_color);
+        String itemTitleColor = getConfig(appWidgetId, R.string.pref_widget_item_title_color);
+        String dividerColor = getConfig(appWidgetId, R.string.pref_widget_divider_color);
+
+        // Apply background color
+        int bgColorResolved = resolveColor(bgColor, config.isLightTheme, 0);
+        remoteViews.setInt(R.id.widget_container, "setBackgroundColor", bgColorResolved);
+
+        // Apply icon colors
+        int iconColorResolved = resolveColor(iconColor, config.isLightTheme, 1);
+        remoteViews.setInt(R.id.button_settings, "setColorFilter", iconColorResolved);
+        remoteViews.setInt(R.id.button_refresh, "setColorFilter", iconColorResolved);
+
+        // Apply title color
+        int titleColorResolved = resolveColor(titleColor, config.isLightTheme, 2);
+        remoteViews.setTextColor(R.id.title, titleColorResolved);
+
+        // Apply subtitle color
+        int subtitleColorResolved = resolveColor(subtitleColor, config.isLightTheme, 3);
+        remoteViews.setTextColor(R.id.subtitle, subtitleColorResolved);
+
+        // Apply divider color
+        int dividerColorResolved = resolveColor(dividerColor, config.isLightTheme, 5);
+        remoteViews.setInt(R.id.divider, "setBackgroundColor", dividerColorResolved);
+
+        // Store item title color in Intent extras for WidgetService to use
+        // (list items are rendered separately in WidgetService)
     }
 
     private void updateTitle(RemoteViews remoteViews, WidgetConfig config) {

@@ -324,4 +324,36 @@
     <string name="notification_channel_downloads">Downloads</string>
     <string name="reply">Reply</string>
 
+    <!-- Widget visual customization -->
+    <string name="widget_visual_customization">Visual Customization</string>
+    <string name="pref_widget_bg_color">pref_widget_bg_color</string>
+    <string name="pref_widget_bg_color_title">Background Color</string>
+    <string name="pref_widget_bg_color_summary">Widget background color</string>
+    <string name="pref_widget_icon_color">pref_widget_icon_color</string>
+    <string name="pref_widget_icon_color_title">Icon Color</string>
+    <string name="pref_widget_icon_color_summary">Settings and refresh button color</string>
+    <string name="pref_widget_title_color">pref_widget_title_color</string>
+    <string name="pref_widget_title_color_title">Title Color</string>
+    <string name="pref_widget_title_color_summary">Header title text color</string>
+    <string name="pref_widget_subtitle_color">pref_widget_subtitle_color</string>
+    <string name="pref_widget_subtitle_color_title">Subtitle Color</string>
+    <string name="pref_widget_subtitle_color_summary">Last updated text color</string>
+    <string name="pref_widget_item_title_color">pref_widget_item_title_color</string>
+    <string name="pref_widget_item_title_color_title">Item Title Color</string>
+    <string name="pref_widget_item_title_color_summary">Story title text color</string>
+    <string name="pref_widget_divider_color">pref_widget_divider_color</string>
+    <string name="pref_widget_divider_color_title">Divider Color</string>
+    <string name="pref_widget_divider_color_summary">Header divider line color</string>
+
+    <!-- Widget color values -->
+    <string name="pref_widget_color_value_auto">auto</string>
+    <string name="pref_widget_color_value_white">white</string>
+    <string name="pref_widget_color_value_black">black</string>
+    <string name="pref_widget_color_value_grey">grey</string>
+    <string name="pref_widget_color_value_dark_grey">dark_grey</string>
+    <string name="pref_widget_color_value_light_grey">light_grey</string>
+    <string name="pref_widget_color_value_transparent_black">transparent_black</string>
+    <string name="pref_widget_color_value_transparent_white">transparent_white</string>
+    <string name="pref_widget_color_value_orange">orange</string>
+
 </resources>

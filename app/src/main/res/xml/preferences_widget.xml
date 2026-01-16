@@ -51,4 +51,58 @@
 
     </androidx.preference.PreferenceCategory>
 
+    <androidx.preference.PreferenceCategory
+        android:title="@string/widget_visual_customization"
+        style="@style/Preference.Category.Hint">
+
+        <io.github.hidroh.materialistic.preference.SimpleSpinnerPreference
+            android:key="@string/pref_widget_bg_color"
+            android:title="@string/pref_widget_bg_color_title"
+            android:summary="@string/pref_widget_bg_color_summary"
+            android:defaultValue="@string/pref_widget_color_value_auto"
+            app:entries="@array/pref_widget_color_options"
+            app:entryValues="@array/pref_widget_color_values" />
+
+        <io.github.hidroh.materialistic.preference.SimpleSpinnerPreference
+            android:key="@string/pref_widget_icon_color"
+            android:title="@string/pref_widget_icon_color_title"
+            android:summary="@string/pref_widget_icon_color_summary"
+            android:defaultValue="@string/pref_widget_color_value_auto"
+            app:entries="@array/pref_widget_color_options"
+            app:entryValues="@array/pref_widget_color_values" />
+
+        <io.github.hidroh.materialistic.preference.SimpleSpinnerPreference
+            android:key="@string/pref_widget_title_color"
+            android:title="@string/pref_widget_title_color_title"
+            android:summary="@string/pref_widget_title_color_summary"
+            android:defaultValue="@string/pref_widget_color_value_auto"
+            app:entries="@array/pref_widget_color_options"
+            app:entryValues="@array/pref_widget_color_values" />
+
+        <io.github.hidroh.materialistic.preference.SimpleSpinnerPreference
+            android:key="@string/pref_widget_subtitle_color"
+            android:title="@string/pref_widget_subtitle_color_title"
+            android:summary="@string/pref_widget_subtitle_color_summary"
+            android:defaultValue="@string/pref_widget_color_value_auto"
+            app:entries="@array/pref_widget_color_options"
+            app:entryValues="@array/pref_widget_color_values" />
+
+        <io.github.hidroh.materialistic.preference.SimpleSpinnerPreference
+            android:key="@string/pref_widget_item_title_color"
+            android:title="@string/pref_widget_item_title_color_title"
+            android:summary="@string/pref_widget_item_title_color_summary"
+            android:defaultValue="@string/pref_widget_color_value_auto"
+            app:entries="@array/pref_widget_color_options"
+            app:entryValues="@array/pref_widget_color_values" />
+
+        <io.github.hidroh.materialistic.preference.SimpleSpinnerPreference
+            android:key="@string/pref_widget_divider_color"
+            android:title="@string/pref_widget_divider_color_title"
+            android:summary="@string/pref_widget_divider_color_summary"
+            android:defaultValue="@string/pref_widget_color_value_auto"
+            app:entries="@array/pref_widget_color_options"
+            app:entryValues="@array/pref_widget_color_values" />
+
+    </androidx.preference.PreferenceCategory>
+
 </androidx.preference.PreferenceScreen>
