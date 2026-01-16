@@ -63,7 +63,14 @@ public class WidgetConfigActivity extends InjectableActivity {
     }
 
     private void configure() {
-        new WidgetHelper(this).configure(mAppWidgetId);
+        WidgetHelper widgetHelper = new WidgetHelper(this);
+
+        // Configure the widget (schedules updates and applies current settings)
+        widgetHelper.configure(mAppWidgetId);
+
+        // Force an immediate refresh to apply changes
+        widgetHelper.refresh(mAppWidgetId);
+
         setResult(RESULT_OK, new Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId));
         finish();
     }
