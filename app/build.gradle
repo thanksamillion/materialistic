@@ -5,6 +5,10 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdk 34
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId "io.github.hidroh.materialistic"
         minSdkVersion 21
