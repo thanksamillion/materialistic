@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk 35
+    compileSdk 34
 
     defaultConfig {
         applicationId "io.github.hidroh.materialistic"
         minSdkVersion 21
-        targetSdkVersion 35
+        targetSdkVersion 34
         versionCode 79
         versionName "3.3"
         buildConfigField "int", "LATEST_RELEASE", "77"
