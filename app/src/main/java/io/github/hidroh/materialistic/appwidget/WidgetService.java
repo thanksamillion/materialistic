@@ -139,8 +139,8 @@ public class WidgetService extends RemoteViewsService {
                     .append(getSpan(item.getScore(), SCORE, mHotThreshold * AppUtils.HOT_FACTOR))
                     .append(SUBTITLE_SEPARATOR)
                     .append(getSpan(item.getKidCount(), COMMENT, mHotThreshold)));
-            remoteViews.setOnClickFillInIntent(R.id.item_view, new Intent().setData(
-                    AppUtils.createItemUri(item.getId())));
+            remoteViews.setOnClickFillInIntent(R.id.item_view,
+                    new Intent(Intent.ACTION_VIEW, AppUtils.createItemUri(item.getId())));
             return remoteViews;
         }
 

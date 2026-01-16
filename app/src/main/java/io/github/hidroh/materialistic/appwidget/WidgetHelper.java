@@ -153,8 +153,8 @@ class WidgetHelper {
         remoteViews.setEmptyView(android.R.id.list, R.id.empty);
         remoteViews.setPendingIntentTemplate(android.R.id.list,
                 PendingIntent.getActivity(mContext, 0, new Intent(Intent.ACTION_VIEW),
-                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ?
-                                PendingIntent.FLAG_IMMUTABLE :
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ?
+                                PendingIntent.FLAG_MUTABLE :
                                 0));
     }
 
