@@ -29,16 +29,15 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            // Use debug signing for release build
             signingConfig signingConfigs.debug
         }
     }
-    lint {
+    lintOptions {
         htmlReport false
         xmlReport false
         textReport true
         lintConfig file("${rootProject.getRootDir()}/lint.xml")
-        abortOnError false
+        abortOnError true
         explainIssues false
         absolutePaths false
     }
