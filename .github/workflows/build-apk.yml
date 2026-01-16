@@ -26,7 +26,17 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug --stacktrace
+      run: |
+        ./gradlew assembleDebug --stacktrace 2>&1 | tee /tmp/build.log
+        exit_code=${PIPESTATUS[0]}
+        if [ $exit_code -ne 0 ]; then
+          echo "::error::Build failed with exit code $exit_code"
+          echo "=== Last 100 lines of build output ==="
+          tail -100 /tmp/build.log
+          echo "=== Searching for errors ==="
+          grep -i "error\|exception\|failed" /tmp/build.log | tail -50 || true
+          exit $exit_code
+        fi
 
     - name: Build Release APK
       run: ./gradlew assembleRelease --stacktrace
